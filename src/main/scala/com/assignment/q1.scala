@@ -1,6 +1,7 @@
-package com.assignment.models
+package com.assignment
 
-import com.assignment.models.models.{ScoreCard, Student}
+import com.assignment.models.ScoreCard
+import com.assignment.models.models.Student
 
 object q1 extends App {
 
