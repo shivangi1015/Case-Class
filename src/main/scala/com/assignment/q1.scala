@@ -14,7 +14,7 @@ object q1 extends App {
      in a List, otherwise the key should be the student name and value should be
       the case class ScoreCard. e.g. Map should be Map[String, AnyRef].
    */
-  def generateScore(): List[Map[String, AnyRef]] = {
+  def generateScore(): String = {
 
     val students = List(
       Student(1, "Mahesh"),
@@ -37,7 +37,14 @@ object q1 extends App {
 
     val studentNames: List[String] = studentMarks.map(s => s._1)
 
-    if(studentNames.distinct.lengthCompare(studentNames.size) == 0) {
+    println(studentMarks)
+    studentMarks.foreach(s1 => println(s1))
+
+    /*def inn(list: List[(String, ScoreCard)]): List[(String, List[ScoreCard])] = {
+      list match
+    }*/
+
+  /*  if(studentNames.distinct.lengthCompare(studentNames.size) == 0) {
       // No student has same name
       println("inside if")
       val re: List[Map[String, ScoreCard]] =  for{
@@ -52,62 +59,11 @@ object q1 extends App {
       //student has same name
       println("inside else")
 
-      println(":: " + studentMarks.map(x => x._1).groupBy(identity).filter(x => x._2.size > 1))
-     /* val s: Map[String, List[String]] = studentMarks.map(x => x._1).groupBy(identity).filter(x => x._2.size > 1)
-      val s1: immutable.Iterable[String] = studentMarks.map(x => x._1).groupBy(identity).filter(x => x._2.size > 1).map(x => x._1)
-     println("id: " + s1)
-      println(":: " + studentMarks.map(x => x._1).groupBy(identity).filter(x => x._2.size > 1).map(x => x._1))
-      val grpby = studentNames.groupBy(identity)
-      println("grp: " + grpby)
-      val dist = grpby.filter(x => x._2.size > 1).map(x => x._1)
-      println("dist: " + dist)*/
-
-      val studentMarksAndStudentId: List[((String, Long), ScoreCard)] = for{
-        student <- students
-        scoreCard <- scoreCards
-        if student.id == scoreCard.studentId
-      } yield (student.name, student.id )-> scoreCard
-      println("studentMarksAndStudentId:: " + studentMarksAndStudentId)
-
-      val l = for{
-        s <- studentMarksAndStudentId
-        scoreCard <- scoreCards
-        if s._1._2 == scoreCard.studentId
-      } yield Map(s._1._1 -> scoreCard)
-
-      println("lets see::")
-      println(l)
-
-      for{
-        student <- students
-        scoreCard <- scoreCards
-      } yield Map(student.name -> scoreCard)
-    }
-/*
-    val listOfStudents: List[Student] = List(Student(1, "shivangi"), Student(2, "mahesh"),
-      Student(2, "mahesh"))
-//    val listOfScoreCard = List(ScoreCard(1, Map(1L -> 1), 70), ScoreCard(2, Map(2L -> 2), 80))
-
-    val studentNames = listOfStudents.map(x => x.name)
-    if(studentNames.lengthCompare(unique(studentNames).size) == 0) {
-      // No student has same name
-      Map()
-    } else {
-      //student has same name
-
     }*/
+""
   }
 
-  def unique(list: List[String]): List[String] = {
-    def inner(rem: List[String], uniqueList: List[String]): List[String] = {
-      rem match {
-        case h :: tail if !(uniqueList contains h) => inner(tail, uniqueList :+ h)
-        case _ :: tail => inner(tail, uniqueList)
-        case Nil => uniqueList
-      }
-    }
-    inner(list, Nil)
-  }
+
 
   val r = generateScore()
   println(r)
