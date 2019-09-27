@@ -2,8 +2,6 @@ package com.assignment
 
 import com.assignment.models.{ScoreCard, Student}
 
-import scala.collection.immutable
-
 object q1 extends App {
 
   /*
@@ -14,7 +12,7 @@ object q1 extends App {
      in a List, otherwise the key should be the student name and value should be
       the case class ScoreCard. e.g. Map should be Map[String, AnyRef].
    */
-  def generateScore(): String = {
+  def generateScore(): Map[String, AnyRef] = {
 
     val students = List(
       Student(1, "Mahesh"),
@@ -29,42 +27,18 @@ object q1 extends App {
 
     )
 
-    val studentMarks: List[(String, ScoreCard)] = for{
+    val studentMarks: List[(String, ScoreCard)] = for {
       student <- students
       scoreCard <- scoreCards
       if student.id == scoreCard.studentId
     } yield student.name -> scoreCard
 
-    val studentNames: List[String] = studentMarks.map(s => s._1)
+    studentMarks.groupBy(x => x._1).map {
+      case (k, v) if v.length > 1 => (k, v.map { case (_, s) => s })
+      case (k, v) => (k, v.head._2)
 
-    println(studentMarks)
-    studentMarks.foreach(s1 => println(s1))
-
-    /*def inn(list: List[(String, ScoreCard)]): List[(String, List[ScoreCard])] = {
-      list match
-    }*/
-
-  /*  if(studentNames.distinct.lengthCompare(studentNames.size) == 0) {
-      // No student has same name
-      println("inside if")
-      val re: List[Map[String, ScoreCard]] =  for{
-        student <- students
-        scoreCard <- scoreCards
-        if student.id == scoreCard.studentId
-      } yield Map(student.name -> scoreCard)
-
-      println(re)
-      re
-    } else {
-      //student has same name
-      println("inside else")
-
-    }*/
-""
+    }
   }
 
-
-
-  val r = generateScore()
-  println(r)
+  println(generateScore())
 }
