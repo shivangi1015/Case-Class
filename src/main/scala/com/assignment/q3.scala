@@ -27,7 +27,7 @@ object q3 extends App {
     has male student's scorecard and the second field has female student's scorecards.
    */
 
-  def getScoreCardByGender(): (List[ScoreCard], List[ScoreCard])  =  {
+  def getScoreCardByGender: (List[ScoreCard], List[ScoreCard])  =  {
 
     val studentMarks: List[(Long, Gender, ScoreCard)] = for{
       student <- students
@@ -42,5 +42,5 @@ object q3 extends App {
     (maleSc, femaleSc)
   }
 
-  println(getScoreCardByGender())
+  println(getScoreCardByGender)
 }
